@@ -20,7 +20,7 @@ type Props = {
   onSubmit: (FormData: SearchForm) => void;
   placeHolder: string;
   onReset?: () => void;
-  searchQuery: string;
+  searchQuery?: string;
 };
 
 const SearchBar = ({ onSubmit, placeHolder, onReset, searchQuery }: Props) => {
