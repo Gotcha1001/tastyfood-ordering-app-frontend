@@ -23,7 +23,7 @@ const SearchResultCard = ({ restaurant }: Props) => {
         >
           <img
             src={restaurant.imageUrl}
-            className="rounded-md w-full h-full object-cover"
+            className="rounded-md w-full h-full inline-block"
             alt="Restaurant Image"
           />
         </motion.div>

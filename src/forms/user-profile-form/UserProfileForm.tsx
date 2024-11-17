@@ -24,15 +24,23 @@ const formSchema = z.object({
   country: z.string().min(1, "Country is required"),
 });
 
-type UserFormData = z.infer<typeof formSchema>;
+export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
   currentUser: User;
   onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
+  title?: string;
+  buttonText?: string;
 };
 
-const UserProfileForm = ({ isLoading, onSave, currentUser }: Props) => {
+const UserProfileForm = ({
+  isLoading,
+  onSave,
+  currentUser,
+  title = "UserProfile",
+  buttonText = "Submit",
+}: Props) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: currentUser,
@@ -46,10 +54,10 @@ const UserProfileForm = ({ isLoading, onSave, currentUser }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSave)}
-        className="space-y-4 gradient-background7 rounded-lg md:p-10"
+        className="space-y-4  rounded-lg md:p-10 p-3 m-2 gradient-background2"
       >
         <div>
-          <h2 className="text-2xl font-bold">User Profile Form</h2>
+          <h2 className="text-2xl font-bold text-white">{title}</h2>
           <FormDescription className="text-gray-300">
             View and change your profile information here
           </FormDescription>
@@ -59,7 +67,7 @@ const UserProfileForm = ({ isLoading, onSave, currentUser }: Props) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel className="text-white">Email</FormLabel>
               <FormControl>
                 <Input {...field} disabled className="bg-white" />
               </FormControl>
@@ -71,7 +79,7 @@ const UserProfileForm = ({ isLoading, onSave, currentUser }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel className="text-white">Name</FormLabel>
               <FormControl>
                 <Input {...field} className="bg-white" />
               </FormControl>
@@ -85,7 +93,7 @@ const UserProfileForm = ({ isLoading, onSave, currentUser }: Props) => {
             name="addressLine1"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Address Line 1</FormLabel>
+                <FormLabel className="text-white">Address Line 1</FormLabel>
                 <FormControl>
                   <Input {...field} className="bg-white" />
                 </FormControl>
@@ -98,7 +106,7 @@ const UserProfileForm = ({ isLoading, onSave, currentUser }: Props) => {
             name="city"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>City</FormLabel>
+                <FormLabel className="text-white">City</FormLabel>
                 <FormControl>
                   <Input {...field} className="bg-white" />
                 </FormControl>
@@ -111,7 +119,7 @@ const UserProfileForm = ({ isLoading, onSave, currentUser }: Props) => {
             name="country"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Country</FormLabel>
+                <FormLabel className="text-white">Country</FormLabel>
                 <FormControl>
                   <Input {...field} className="bg-white" />
                 </FormControl>
@@ -124,7 +132,7 @@ const UserProfileForm = ({ isLoading, onSave, currentUser }: Props) => {
           <LoadingButton />
         ) : (
           <Button type="submit" className="bg-orange-500">
-            Submit
+            {buttonText}
           </Button>
         )}
       </form>
