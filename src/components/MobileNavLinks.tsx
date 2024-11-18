@@ -26,13 +26,19 @@ const MobileNavLinks = () => {
         User Profile
       </Link>
       <Button
-        onClick={() =>
+        onClick={() => {
+          // Add a check for the current environment
+          const isLocalhost = window.location.hostname === "localhost";
+          const returnUrl = isLocalhost
+            ? "http://localhost:5173"
+            : "https://tastyfood-ordering-app-frontend.onrender.com";
+
           logout({
             logoutParams: {
-              returnTo: import.meta.env.VITE_AUTH0_LOGOUT_URL,
+              returnTo: returnUrl,
             },
-          })
-        }
+          });
+        }}
         className="flex items-center px-3 font-bold hover:bg-gray-500"
       >
         Log Out
